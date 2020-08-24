@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_24_170935) do
+ActiveRecord::Schema.define(version: 2020_08_24_181608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2020_08_24_170935) do
     t.string "competition_country"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "team_country"
     t.index ["competition_id"], name: "index_football_teams_on_competition_id", unique: true
     t.index ["team_api_id"], name: "index_football_teams_on_team_api_id", unique: true
   end
