@@ -1,13 +1,5 @@
 require 'httparty'
 
-client = Twitter::REST::Client.new do |config|
-  config.consumer_key        = ENV['TWITTER_CONSUMER_KEY']
-  config.consumer_secret     = ENV['TWITTER_CONSUMER_SECRET']
-  config.access_token        = ENV['TWITTER_ACCESS_TOKEN']
-  config.access_token_secret = ENV['TWITTER_ACCESS_TOKEN_SECRET']
-end
-
-
 base_uri = ENV['BASE_URI']
 sports_token_key = ENV['SPORTS_TOKEN_KEY']
 sports_token_value = ENV['SPORTS_TOKEN_VALUE']
