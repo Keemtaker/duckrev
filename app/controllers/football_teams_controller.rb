@@ -1,7 +1,11 @@
 class FootballTeamsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:index]
 
   def index
-    @teams = FootballTeam.all
+    @teams = FootballTeam.all.order(:short_name)
+  end
+
+  def create
+    @user = current_user
+    @user.football_team = FootballTeam.find(params[:team])
   end
 end

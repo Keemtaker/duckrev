@@ -1,50 +1,38 @@
 <br>
-<div class="container">
-  <div class="col-sm-12">
-    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-      <% country_array = [] %>
-      <% @teams.each do | team | %>
-        <% country_array << team.team_country %>
-        <% country_array.delete("Monaco") %>
-      <% end %>
-      <% country_array.uniq.sort.each do | country  | %>
-        <a class="nav-link <%= 'active' if country == 'England' %>" id="v-pills-<%= country %>-tab" data-toggle="pill" href="#v-pills-<%= country %>" role="tab" aria-controls="v-pills-<%= country %>" aria-selected="true"><%= country %></a>
-      <% end %>
+<%= form_with url: '/football_teams', local: true do |form| %>
+  <div class="container">
+    <div class="col-sm-12">
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <% country_array = [] %>
+        <% @teams.each do | team | %>
+          <% country_array << team.team_country %>
+          <% country_array.delete("Monaco") %>
+        <% end %>
+        <% country_array.uniq.sort.each do | country  | %>
+          <a class="nav-link <%= 'active' if country == 'England' %>" id="v-pills-<%= country %>-tab" data-toggle="pill" href="#v-pills-<%= country %>" role="tab" aria-controls="v-pills-<%= country %>" aria-selected="true"><%= country %></a>
+        <% end %>
+      </div>
+      <br>
+
+      <div class="tab-content" id="v-pills-tabContent">
+        <% @teams.group_by(&:team_country).each do |country, country_teams| %>
+          <div class="tab-pane fade <%= 'show active' if country == 'England' %>" id="v-pills-<%= country %>" role="tabpanel" aria-labelledby="v-pills-<%= country %>-tab">
+            <% country_teams.each do | team | %>
+              <br>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="team" id="<%= team.id %>" value="<%= team.id %>">
+                <label class="form-check-label" for="<%= team.id %>">
+                  <%= team.short_name %>
+                </label>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
     </div>
     <br>
-    <div class="tab-content" id="v-pills-tabContent">
-      <div class="tab-pane fade show active" id="v-pills-England" role="tabpanel" aria-labelledby="v-pills-England-tab">
-        <% @teams.each do | team | %>
-          <% if team.team_country == "England" %>
-            <div class="form-check">
-              <input class="form-check-input" type="radio" name="my-radios" id="<%= team.team_api_id %>" value="<%= team.team_api_id %>">
-              <label class="form-check-label" for="<%= team.team_api_id %>">
-                <%= team.short_name %>
-              </label>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
-      <div class="tab-pane fade" id="v-pills-France" role="tabpanel" aria-labelledby="v-pills-France-tab">
-        <% @teams.each do | team | %>
-          <%= team.short_name if team.team_country == "France" %>
-        <% end %>
-      </div>
-      <div class="tab-pane fade" id="v-pills-Germany" role="tabpanel" aria-labelledby="v-pills-Germany-tab">
-        <% @teams.each do | team | %>
-          <%= team.short_name if team.team_country == "Germany" %>
-        <% end %>
-      </div>
-      <div class="tab-pane fade" id="v-pills-Italy" role="tabpanel" aria-labelledby="v-pills-Italy-tab">
-        <% @teams.each do | team | %>
-          <%= team.short_name if team.team_country == "Italy" %>
-        <% end %>
-      </div>
-      <div class="tab-pane fade" id="v-pills-Spain" role="tabpanel" aria-labelledby="v-pills-Spain-tab">
-        <% @teams.each do | team | %>
-          <%= team.short_name if team.team_country == "Spain" %>
-        <% end %>
-      </div>
-    </div>
+    <%= form.submit 'Submit', class: "btn btn-md btn-success btn-lg" %>
+    <br>
   </div>
-</div>
+<% end %>
+
