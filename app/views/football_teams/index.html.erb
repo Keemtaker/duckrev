@@ -1,0 +1,38 @@
+<br>
+<%= form_with url: '/football_teams', local: true do |form| %>
+  <div class="container">
+    <div class="col-sm-12">
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <% country_array = [] %>
+        <% @teams.each do | team | %>
+          <% country_array << team.team_country %>
+          <% country_array.delete("Monaco") %>
+        <% end %>
+        <% country_array.uniq.sort.each do | country  | %>
+          <a class="nav-link <%= 'active' if country == 'England' %>" id="v-pills-<%= country %>-tab" data-toggle="pill" href="#v-pills-<%= country %>" role="tab" aria-controls="v-pills-<%= country %>" aria-selected="true"><%= country %></a>
+        <% end %>
+      </div>
+      <br>
+
+      <div class="tab-content" id="v-pills-tabContent">
+        <% @teams.group_by(&:team_country).each do |country, country_teams| %>
+          <div class="tab-pane fade <%= 'show active' if country == 'England' %>" id="v-pills-<%= country %>" role="tabpanel" aria-labelledby="v-pills-<%= country %>-tab">
+            <% country_teams.each do | team | %>
+              <br>
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="team" id="<%= team.id %>" value="<%= team.id %>">
+                <label class="form-check-label" for="<%= team.id %>">
+                  <%= team.short_name %>
+                </label>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <br>
+    <%= form.submit 'Submit', class: "btn btn-md btn-success btn-lg" %>
+    <br>
+  </div>
+<% end %>
+
