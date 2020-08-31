@@ -5,8 +5,9 @@
       <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
         <% country_array = [] %>
         <% @teams.each do | team | %>
+
           <% country_array << team.team_country %>
-          <% country_array.delete("Monaco") %>
+          <% country_array %>
         <% end %>
         <% country_array.uniq.sort.each do | country  | %>
           <a class="nav-link <%= 'active' if country == 'England' %>" id="v-pills-<%= country %>-tab" data-toggle="pill" href="#v-pills-<%= country %>" role="tab" aria-controls="v-pills-<%= country %>" aria-selected="true"><%= country %></a>
