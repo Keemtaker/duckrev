@@ -1,0 +1,20 @@
+<br>
+<div class="container">
+  <div class="col-sm-12">
+    <% @scores.each do | score | %>
+      <%= link_to football_score_path(score) do %>
+        <div class="card" style="width: 18rem;">
+          <div class="card-header">
+            <%= score.competition_name %>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><%= score.home_team_name %>  <%= score.home_team_fulltime_score %></li>
+            <li class="list-group-item"><%= score.away_team_name %>  <%= score.away_team_fulltime_score %></li>
+          </ul>
+        </div>
+      <% end %>
+      <br>
+    <% end %>
+  </div>
+</div>
+
