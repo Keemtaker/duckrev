@@ -6,4 +6,6 @@ class User < ApplicationRecord
 
   has_one :user_football_team
   has_one :football_team, through: :user_football_team, dependent: :destroy
+
+  has_many :football_reviews, dependent: :destroy
 end

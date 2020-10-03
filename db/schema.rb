@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_31_200413) do
+ActiveRecord::Schema.define(version: 2020_10_03_113447) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "football_reviews", force: :cascade do |t|
+    t.text "content"
+    t.integer "rating"
+    t.bigint "user_id", null: false
+    t.bigint "football_score_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["football_score_id"], name: "index_football_reviews_on_football_score_id"
+    t.index ["user_id"], name: "index_football_reviews_on_user_id"
+  end
 
   create_table "football_scores", force: :cascade do |t|
     t.string "home_team_name"
@@ -40,6 +51,17 @@ ActiveRecord::Schema.define(version: 2020_08_31_200413) do
     t.index ["team_api_id"], name: "index_football_teams_on_team_api_id", unique: true
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.integer "rating"
+    t.text "content"
+    t.bigint "user_id", null: false
+    t.bigint "football_score_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["football_score_id"], name: "index_reviews_on_football_score_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "user_football_teams", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "football_team_id", null: false
@@ -61,6 +83,10 @@ ActiveRecord::Schema.define(version: 2020_08_31_200413) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "football_reviews", "football_scores"
+  add_foreign_key "football_reviews", "users"
+  add_foreign_key "reviews", "football_scores"
+  add_foreign_key "reviews", "users"
   add_foreign_key "user_football_teams", "football_teams"
   add_foreign_key "user_football_teams", "users"
 end
