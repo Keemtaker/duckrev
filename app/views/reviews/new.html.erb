@@ -1,6 +1,6 @@
 <%= simple_form_for @review, :url => football_score_reviews_path(@footie_score, @review), :method => :post, html: { class: 'form-horizontal' },wrapper: :horizontal_form do |f| %>
 
-  <%= f.input :content,  :label => "Content" %>
+  <%= f.input :content, as: :text, :label => "Content" %>
 
   <%= f.submit 'Submit Application', class: "btn btn-md btn-block btn-success" %>
 
