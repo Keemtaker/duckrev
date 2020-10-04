@@ -3,8 +3,8 @@ require 'test_helper'
 class FootballScoreTest < ActiveSupport::TestCase
 
   def setup
-     @first_score = football_scores(:FirstScore)
-     @second_score = football_scores(:SecondScore)
+    @first_score = football_scores(:FirstScore)
+    @second_score = football_scores(:SecondScore)
   end
 
   test "football scores rake task" do
