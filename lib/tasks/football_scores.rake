@@ -9,9 +9,9 @@ task :footie_scores_data => :environment do
   FootballScore.destroy_all
   competition_ids = ["2002", "2014", "2015", "2019", "2021"]
   competition_ids.each do | competition_id |
-    response = HTTParty.get("#{base_uri}/competitions/#{competition_id}/matches?status=FINISHED&dateFrom=2020-08-20&dateTo=2020-08-28", :headers => { "#{sports_token_key}" => "#{sports_token_value}"}).parsed_response
+    response = HTTParty.get("#{base_uri}/competitions/#{competition_id}/matches?status=FINISHED&dateFrom=2020-09-30&dateTo=2020-10-03", :headers => { "#{sports_token_key}" => "#{sports_token_value}"}).parsed_response
     response["matches"].each do |score|
-      puts "creating football scores"
+      puts "creating football scores #{score["homeTeam"]["name"]}"
       puts "-----------------------"
       FootballScore.create(home_team_name: score["homeTeam"]["name"], away_team_name: score["awayTeam"]["name"], home_team_id: score["homeTeam"]["id"],
                             away_team_id: score["awayTeam"]["id"], home_team_fulltime_score: score["score"]["fullTime"]["homeTeam"],
