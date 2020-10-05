@@ -1,3 +1,8 @@
 FirstUser:
-  email: keem@gmail
+  uid: 123456
+  provider: twitter
+  username: keem
+  name: Keem
   encrypted_password: 123456
+
+
