@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
-  root to: 'football_teams#index'
+  root to: 'football_scores#index'
 
   resources :football_teams, only: [:index, :create]
   resources :football_scores do
