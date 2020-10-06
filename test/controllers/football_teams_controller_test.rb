@@ -41,6 +41,12 @@ class FootballTeamsControllerTest < ActionDispatch::IntegrationTest
     assert_select "input[type=radio]"
   end
 
+  test "for submit form inputs on index" do
+    sign_in @first_user
+    get football_teams_url
+    assert_select "input[type=submit]"
+  end
+
   test "for a tags om index" do
     sign_in @first_user
     get football_teams_url
