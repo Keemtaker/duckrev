@@ -2,6 +2,13 @@
 <%= form_with url: '/football_teams', local: true do |form| %>
   <div class="container">
     <div class="col-sm-12">
+      <ul>
+        <li>Please choose the club that you support from any of the countries below</li>
+        <br>
+        <li>You will review your club games as a fan but review other games as a neutral fan</li>
+        <br>
+        <li>If you do not pick any club, you will review all games as a neutral fan</li>
+      </ul>
       <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
         <% country_array = [] %>
         <% @teams.each do | team | %>
@@ -13,7 +20,6 @@
           <a class="nav-link <%= 'active' if country == 'England' %>" id="v-pills-<%= country %>-tab" data-toggle="pill" href="#v-pills-<%= country %>" role="tab" aria-controls="v-pills-<%= country %>" aria-selected="true"><%= country %></a>
         <% end %>
       </div>
-      <br>
 
       <div class="tab-content" id="v-pills-tabContent">
         <% @teams.group_by(&:team_country).each do |country, country_teams| %>
@@ -32,8 +38,12 @@
       </div>
     </div>
     <br>
-    <%= form.submit 'Submit', class: "btn btn-md btn-success btn-lg" %>
+    <%= form.submit 'Submit', class: "btn btn-md btn-primary btn-lg btn-block" %>
+    <br>
+    <br>
+      <%= link_to "Skip and choose team later", football_scores_path, class: "btn btn-md btn-danger btn-lg btn-block" %>
     <br>
   </div>
+  <br>
 <% end %>
 
