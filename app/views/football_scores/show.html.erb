@@ -24,5 +24,22 @@
     <% else %>
       <%= link_to "Sign in with twitter to review a game", user_twitter_omniauth_authorize_path, class: "btn btn-md btn-primary" %>
     <% end %>
+    <br>
+    <br>
+    <% @score.football_reviews.each do | review | %>
+      <div class="card bg-light mb-3">
+        <div class="card-header">
+          <span><%= "@#{review.user.username}" %></span>
+          <span class="float-right" style="font-style: italic;"><%= "#{review.user.football_team.short_name} fan" %></span>
+        </div>
+        <div class="card-body">
+          <span style="margin-right: 10px;"><i style="color: deeppink;" class="far fa-star"></i></span><span style="font-size: 20px"><%= "#{review.rating}" %></span>/10
+          <br>
+          <br>
+          <div><%= review.content %></div>
+        </div>
+      </div>
+      <br>
+    <% end %>
   </div>
 </div>

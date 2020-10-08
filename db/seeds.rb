@@ -6,3 +6,38 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+puts "Creating users"
+user_list = [
+  {username: "Keem", uid: "123", provider: "twitter", password: "123456", email: nil},
+  {username: "Ronaldo", uid: "214", provider: "twitter", password: "123457", email: nil},
+  {username: "Ozil", uid: "222", provider: "twitter", password: "123455", email: nil},
+  {username: "Kaka", uid: "12", provider: "twitter", password: "123453", email: nil},
+  {username: "Messi", uid: "345", provider: "twitter", password: "143456", email: nil},
+  {username: "Iniesta", uid: "145", provider: "twitter", password: "153456", email: nil},
+  {username: "Zidane", uid: "347", provider: "twitter", password: "127456", email: nil},
+]
+
+User.create!(user_list)
+
+User.all.each do | user |
+  user.football_team = FootballTeam.all.sample
+end
+
+
+review_one = "VAR didn’t give the decision. VAR provides the referee with an opportunity to make a more informed decision. And it’s worked brilliantly so far this season. We should vent our frustration at the people who bring these ridiculous rules in. It’s the rule that’s the problem, not VAR"
+review_two = "Barca paid Liverpool £150M for Coutinho that was used to assemble a team that knocked them out of the CL last season. Then sent Coutinho to Bayern to knock Barcelona out of the CL again this season and now they have to pay another £5M to Liverpool. Talk about poor life choices"
+review_three = "Guardiola's career has had a strange second act. He's like a world-class novelist who emerges with a debut that changes the landscape; but who never quite writes a book of that brilliance again, despite several manifestations of genius in the years since."
+
+
+review_list = [
+  {rating: 8, content: review_one, user_id: User.find_by(username: "Keem").id, football_score_id: 307},
+  {rating: 4, content: review_two, user_id: User.find_by(username: "Ronaldo").id, football_score_id: 307},
+  {rating: 7, content: review_three, user_id: User.find_by(username: "Ozil").id, football_score_id: 307},
+  {rating: 9, content: review_two, user_id: User.find_by(username: "Messi").id, football_score_id: 307},
+  {rating: 2, content: review_one, user_id: User.find_by(username: "Iniesta").id, football_score_id: 307},
+  {rating: 5, content: review_three, user_id: User.find_by(username: "Zidane").id, football_score_id: 307},
+]
+
+FootballReview.create!(review_list)
+
+puts "Done"
