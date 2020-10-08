@@ -1,3 +1,28 @@
-<%= @score.home_team_name %>
-
-<%= link_to "Review", new_football_score_football_review_path(@score) %>
+<br>
+<div class="container">
+  <div class="col-sm-8">
+    <div class="card">
+      <div class="card-header">
+        <%= @score.competition_name %>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><%= @score.home_team_name %>
+          <span class="float-right">
+            <%= @score.home_team_fulltime_score %>
+          </span>
+        </li>
+        <li class="list-group-item"><%= @score.away_team_name %>
+          <span class="float-right">
+            <%= @score.away_team_fulltime_score %>
+          </span>
+        </li>
+      </ul>
+    </div>
+    <br>
+    <% if user_signed_in? %>
+      <%= link_to "Review this game", new_football_score_football_review_path(@score), class: "btn btn-md btn-primary" %>
+    <% else %>
+      <%= link_to "Sign in with twitter to review a game", user_twitter_omniauth_authorize_path, class: "btn btn-md btn-primary" %>
+    <% end %>
+  </div>
+</div>
