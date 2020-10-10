@@ -26,20 +26,44 @@
     <% end %>
     <br>
     <br>
-    <% @score.football_reviews.each do | review | %>
-      <div class="card bg-light mb-3">
-        <div class="card-header">
-          <span><%= "@#{review.user.username}" %></span>
-          <span class="float-right" style="font-style: italic;"><%= "#{review.user.football_team.short_name} fan" %></span>
+
+    <% review_categories = ["All", @score.home_team_name, @score.away_team_name, "Neutral"] %>
+
+    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <% review_categories.each do | category | %>
+        <a class="nav-link <%= 'active' if category == 'All' %>" id="v-pills-<%= category.parameterize %>-tab" data-toggle="pill" href="#v-pills-<%= category.parameterize %>" role="tab" aria-controls="v-pills-<%= category.parameterize %>" aria-selected="true"><%= category %> Reviews</a>
+      <% end %>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="tab-content" id="v-pills-tabContent">
+
+      <% home_and_away_ids = [@score.home_team_id, @score.away_team_id] %>
+      <% review_categories.each do | category | %>
+        <div class="tab-pane fade <%= 'show active' if category == 'All' %>" id="v-pills-<%= category.parameterize %>" role="tabpanel" aria-labelledby="v-pills-<%= category.parameterize %>-tab">
+          <% @score.football_reviews.each do | review | %>
+            <% if category == "All"  %>
+              <%= review.content %>
+            <% elsif category == "Neutral"  %>
+               <%= review.content if (review.user.football_team.nil?) || (!home_and_away_ids.include? review.user.football_team.team_api_id ) %>
+            <% elsif (!review.user.football_team.nil?) && (category == @score.home_team_name) %>
+              <% if review.user.football_team.team_api_id == @score.home_team_id %>
+                <%= review.content %>
+              <% end %>
+            <% elsif (!review.user.football_team.nil?) && (category == @score.away_team_name) %>
+              <% if review.user.football_team.team_api_id == @score.away_team_id %>
+                <%= review.content %>
+              <% end %>
+            <% end %>
+            <br>
+            <br>
+          <% end %>
         </div>
-        <div class="card-body">
-          <span style="margin-right: 10px;"><i style="color: deeppink;" class="far fa-star"></i></span><span style="font-size: 20px"><%= "#{review.rating}" %></span>/10
-          <br>
-          <br>
-          <div><%= review.content %></div>
-        </div>
-      </div>
-      <br>
-    <% end %>
+      <% end %>
+
+    </div>
+
   </div>
 </div>

@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: %i[twitter]
 
-  has_one :user_football_team
+  has_one :user_football_team, dependent: :destroy
   has_one :football_team, through: :user_football_team, dependent: :destroy
 
   has_many :football_reviews, dependent: :destroy

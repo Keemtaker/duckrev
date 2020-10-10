@@ -6,6 +6,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+
+User.destroy_all
+FootballReview.destroy_all
+
 puts "Creating users"
 user_list = [
   {username: "Keem", uid: "123", provider: "twitter", password: "123456", email: nil},
@@ -27,15 +31,18 @@ end
 review_one = "VAR didn’t give the decision. VAR provides the referee with an opportunity to make a more informed decision. And it’s worked brilliantly so far this season. We should vent our frustration at the people who bring these ridiculous rules in. It’s the rule that’s the problem, not VAR"
 review_two = "Barca paid Liverpool £150M for Coutinho that was used to assemble a team that knocked them out of the CL last season. Then sent Coutinho to Bayern to knock Barcelona out of the CL again this season and now they have to pay another £5M to Liverpool. Talk about poor life choices"
 review_three = "Guardiola's career has had a strange second act. He's like a world-class novelist who emerges with a debut that changes the landscape; but who never quite writes a book of that brilliance again, despite several manifestations of genius in the years since."
+review_four = "I did not think another footballer could hit 100 international goals in my lifetime. And I certainly didn’t think it would be Ronaldo to do it (if anyone did it) when he emerged, a flamboyant lad with earrings who just wanted to dribble. This sport."
+review_five = "4 champions league titles in 5 years. That is insane. No wonder Madrid fans were simply nonchalant during these champions league title anniversaries whiles other fans were all over the place with excitement"
+review_six = "Luis Suarez is a volatile player in possession. Everything he does is instinctive. More often than not, it comes off because he’s faster in execution than you are at preparing for it. It almost never feels like he plans anything."
 
 
 review_list = [
   {rating: 8, content: review_one, user_id: User.find_by(username: "Keem").id, football_score_id: 307},
   {rating: 4, content: review_two, user_id: User.find_by(username: "Ronaldo").id, football_score_id: 307},
   {rating: 7, content: review_three, user_id: User.find_by(username: "Ozil").id, football_score_id: 307},
-  {rating: 9, content: review_two, user_id: User.find_by(username: "Messi").id, football_score_id: 307},
-  {rating: 2, content: review_one, user_id: User.find_by(username: "Iniesta").id, football_score_id: 307},
-  {rating: 5, content: review_three, user_id: User.find_by(username: "Zidane").id, football_score_id: 307},
+  {rating: 9, content: review_four, user_id: User.find_by(username: "Messi").id, football_score_id: 307},
+  {rating: 2, content: review_five, user_id: User.find_by(username: "Iniesta").id, football_score_id: 307},
+  {rating: 5, content: review_six, user_id: User.find_by(username: "Zidane").id, football_score_id: 307},
 ]
 
 FootballReview.create!(review_list)
