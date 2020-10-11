@@ -44,21 +44,95 @@
       <% review_categories.each do | category | %>
         <div class="tab-pane fade <%= 'show active' if category == 'All' %>" id="v-pills-<%= category.parameterize %>" role="tabpanel" aria-labelledby="v-pills-<%= category.parameterize %>-tab">
           <% @score.football_reviews.each do | review | %>
+
             <% if category == "All"  %>
-              <%= review.content %>
+              <div class="card bg-light mb-3">
+                <div class="card-header">
+                  <span>
+                    <%= "@#{review.user.username}" %>
+                  </span>
+                </div>
+                <div class="card-body">
+                  <span style="margin-right: 10px;"><i style="color: deeppink;" class="far fa-star"></i></span>
+                  <span style="font-size: 20px">
+                    <%= review.rating %>
+                  </span>/10
+                  <br>
+                  <br>
+                  <div>
+                    <%= review.content %>
+                  </div>
+                </div>
+              </div>
+
             <% elsif category == "Neutral"  %>
-               <%= review.content if (review.user.football_team.nil?) || (!home_and_away_ids.include? review.user.football_team.team_api_id ) %>
+              <% if (review.user.football_team.nil?) || (!home_and_away_ids.include? review.user.football_team.team_api_id ) %>
+                <div class="card bg-light mb-3">
+                  <div class="card-header">
+                    <span>
+                      <%= "@#{review.user.username}" %>
+                    </span>
+                  </div>
+                  <div class="card-body">
+                    <span style="margin-right: 10px;"><i style="color: deeppink;" class="far fa-star"></i></span>
+                    <span style="font-size: 20px">
+                      <%= review.rating %>
+                    </span>/10
+                    <br>
+                    <br>
+                    <div>
+                      <%= review.content %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+
             <% elsif (!review.user.football_team.nil?) && (category == @score.home_team_name) %>
               <% if review.user.football_team.team_api_id == @score.home_team_id %>
-                <%= review.content %>
+                <div class="card bg-light mb-3">
+                  <div class="card-header">
+                    <span>
+                      <%= "@#{review.user.username}" %>
+                    </span>
+                  </div>
+                  <div class="card-body">
+                    <span style="margin-right: 10px;"><i style="color: deeppink;" class="far fa-star"></i></span>
+                    <span style="font-size: 20px">
+                      <%= review.rating %>
+                    </span>/10
+                    <br>
+                    <br>
+                    <div>
+                      <%= review.content %>
+                    </div>
+                  </div>
+                </div>
               <% end %>
+
             <% elsif (!review.user.football_team.nil?) && (category == @score.away_team_name) %>
               <% if review.user.football_team.team_api_id == @score.away_team_id %>
-                <%= review.content %>
+                <div class="card bg-light mb-3">
+                  <div class="card-header">
+                    <span>
+                      <%= "@#{review.user.username}" %>
+                    </span>
+                  </div>
+                  <div class="card-body">
+                    <span style="margin-right: 10px;"><i style="color: deeppink;" class="far fa-star"></i></span>
+                    <span style="font-size: 20px">
+                      <%= review.rating %>
+                    </span>/10
+                    <br>
+                    <br>
+                    <div>
+                      <%= review.content %>
+                    </div>
+                  </div>
+                </div>
               <% end %>
+
             <% end %>
-            <br>
-            <br>
+
           <% end %>
         </div>
       <% end %>
