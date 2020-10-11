@@ -1,13 +1,14 @@
 <div class="card bg-light mb-3">
   <div class="card-header">
     <span>
-      <%= review.user.username %>
+      <%= "@#{review.user.username}" %>
     </span>
   </div>
   <div class="card-body">
+    <span style="margin-right: 10px;"><i style="color: deeppink;" class="far fa-star"></i></span>
     <span style="font-size: 20px">
       <%= review.rating %>
-    </span>
+    </span>/10
     <br>
     <br>
     <div>
