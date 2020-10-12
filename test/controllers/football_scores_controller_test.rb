@@ -30,6 +30,7 @@ class FootballScoresControllerTest < ActionDispatch::IntegrationTest
     get football_scores_url
     assert_select "div", @first_score.competition_name
     assert_select 'a'
+    assert_select "li"
   end
 
   test "for elements on show" do
