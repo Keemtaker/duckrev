@@ -16,6 +16,4 @@ class FootballScoresFlowTest < ActionDispatch::IntegrationTest
     get football_scores_url(@first_score)
     assert_response :success
   end
-
-
 end

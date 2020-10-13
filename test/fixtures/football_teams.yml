@@ -3,3 +3,9 @@ WestHam:
   short_name: West Ham
   team_country: England
   team_api_id: 563
+
+Chelsea:
+  name: Chelsea FC
+  short_name: Chelsea
+  team_country: England
+  team_api_id: 564
