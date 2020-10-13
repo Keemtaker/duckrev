@@ -1,7 +1,56 @@
-<%= simple_form_for @review, :url => football_score_football_reviews_path(@footie_score, @review), :method => :post, html: { class: 'form-horizontal' },wrapper: :horizontal_form do |f| %>
+<br>
+<div class="container">
+  <div class="col-sm-10">
+    <div class="card">
+      <div class="card-header">
+        <%= @score.competition_name %>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><%= @score.home_team_name %>
+          <span class="float-right">
+            <%= @score.home_team_fulltime_score %>
+          </span>
+        </li>
+        <li class="list-group-item"><%= @score.away_team_name %>
+          <span class="float-right">
+            <%= @score.away_team_fulltime_score %>
+          </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <br>
+  <div class="col-sm-10">
+    <ul>
+      <li>Your twitter timeline deserves to know your opinion of the game</li>
+      <br>
+      <li>Having said that, please only review the game if you actually watched it</li>
+      <br>
+      <li>Your review will be sent out as a tweet</li>
+    </ul>
+  <div>
 
-  <%= f.input :content, as: :text,  :label => "Content" %>
+  <%= simple_form_for @review, :url => football_score_football_reviews_path(@score, @review), :method => :post do |f| %>
 
-  <%= f.submit 'Submit Application', class: "btn btn-md btn-block btn-success" %>
+    <div class="form-group">
+      <label class="col-sm-1 control-label"></label>
+      <div class="col-sm-10">
+        <%= f.input :rating, collection: 1..10, :label => "Your Rating" %>
+      </div>
+    </div>
 
-<% end %>
+    <div class="form-group">
+      <label class="col-sm-1 control-label"></label>
+      <div class="col-sm-10">
+        <%= f.input :content, as: :text,  :label => "Content" %>
+      </div>
+    </div>
+    <br>
+
+    <div class="col-sm-4">
+      <%= f.button :submit, "Tweet Review", class: "btn btn-md btn-block btn-success" %>
+    </div>
+    <br>
+  <% end %>
+</div>
+

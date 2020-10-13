@@ -1,16 +1,26 @@
 class FootballReviewsController < ApplicationController
 
   def new
-    @footie_score = FootballScore.find(params[:football_score_id])
-    @review = FootballReview.new
+    @score = FootballScore.find(params[:football_score_id])
+    @review = @score.football_reviews.new
   end
 
   def create
     new
-    @review.football_score = @footie_score
-    @review.user = current_user
-    @review.content = params[:football_review][:content]
-    @review.save
+    @review = FootballReview.new(football_review_params)
+    @review.football_score_id = @score.id
+    @review.user_id = current_user.id
+
+    if @review.save
+      flash[:notice] = "Thanks for your review"
+      redirect_to football_scores_path
+    else
+      render :new
+    end
+  end
+
+  def football_review_params
+    params.require(:football_review).permit(:rating, :content, :football_score_id, :user_id)
   end
 
 end
