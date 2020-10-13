@@ -26,7 +26,7 @@ class FootballScoresTest < ApplicationSystemTestCase
     click_on @second_score.home_team_name
 
     review_categories = ["All", @second_score.home_team_name, @second_score.away_team_name, "Neutral"]
-    assert_equal "/football_scores/#{@second_score.id}", page.current_path
+    assert_equal football_score_path(@second_score), page.current_path
     assert_text "Sign in with twitter to review a game"
     assert_text "#{review_categories.sample} Fan Reviews"
     click_on "#{review_categories.sample} Fan Reviews"
@@ -36,9 +36,9 @@ class FootballScoresTest < ApplicationSystemTestCase
 
   test "user should see reviews in right categories" do
     login_as @first_user
-    visit "football_scores/#{@first_score.id}"
+    visit football_score_url(@first_score)
 
-    assert_equal "/football_scores/#{@first_score.id}", page.current_path
+    assert_equal football_score_path(@first_score), page.current_path
     assert_text "Review this game"
     assert_text @first_review.content
 
@@ -52,14 +52,14 @@ class FootballScoresTest < ApplicationSystemTestCase
     assert_text "/10"
 
     click_on "Review this game"
-    assert_equal "/football_scores/#{@first_score.id}/football_reviews/new", page.current_path
+    assert_equal new_football_score_football_review_path(@first_score), page.current_path
   end
 
   test "user should continue to see reviews in right categories " do
     login_as @first_user
     @first_user.football_team = @first_team
-    visit "football_scores/#{@first_score.id}"
-    assert_equal "/football_scores/#{@first_score.id}", page.current_path
+    visit football_score_url(@first_score)
+    assert_equal football_score_path(@first_score), page.current_path
     assert_text @first_review.content
 
     click_on "#{@first_score.home_team_name} Fan Reviews"
@@ -77,8 +77,8 @@ class FootballScoresTest < ApplicationSystemTestCase
 
   test "still testing reviews in right categories" do
     @first_user.football_team = @second_team
-    visit "football_scores/#{@second_score.id}"
-    assert_equal "/football_scores/#{@second_score.id}", page.current_path
+    visit football_score_url(@second_score)
+    assert_equal football_score_path(@second_score), page.current_path
 
     assert_text @second_review.user.username
 
