@@ -1,3 +1,75 @@
-<%= @score.home_team_name %>
+<br>
+<div class="container">
+  <div class="col-sm-8">
+    <div class="card">
+      <div class="card-header">
+        <%= @score.competition_name %>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><%= @score.home_team_name %>
+          <span class="float-right">
+            <%= @score.home_team_fulltime_score %>
+          </span>
+        </li>
+        <li class="list-group-item"><%= @score.away_team_name %>
+          <span class="float-right">
+            <%= @score.away_team_fulltime_score %>
+          </span>
+        </li>
+      </ul>
+    </div>
+    <br>
+    <% if user_signed_in? %>
+      <%= link_to "Review this game", new_football_score_football_review_path(@score), class: "btn btn-md btn-primary" %>
+    <% else %>
+      <%= link_to "Sign in with twitter to review a game", user_twitter_omniauth_authorize_path, class: "btn btn-md btn-primary" %>
+    <% end %>
+    <br>
+    <br>
 
-<%= link_to "Review", new_football_score_football_review_path(@score) %>
+    <% review_categories = ["All", @score.home_team_name, @score.away_team_name, "Neutral"] %>
+
+    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <% review_categories.each do | category | %>
+        <a class="nav-link <%= 'active' if category == 'All' %>" id="v-pills-<%= category.parameterize %>-tab" data-toggle="pill" href="#v-pills-<%= category.parameterize %>" role="tab" aria-controls="v-pills-<%= category.parameterize %>" aria-selected="true"><%= category %> Fan Reviews</a>
+      <% end %>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="tab-content" id="v-pills-tabContent">
+
+      <% home_and_away_ids = [@score.home_team_id, @score.away_team_id] %>
+      <% review_categories.each do | category | %>
+        <div class="tab-pane fade <%= 'show active' if category == 'All' %>" id="v-pills-<%= category.parameterize %>" role="tabpanel" aria-labelledby="v-pills-<%= category.parameterize %>-tab">
+          <% @score.football_reviews.each do | review | %>
+
+            <% if category == "All"  %>
+              <%= render partial: "football_scores/partials/review_cards", locals: {review: review} %>
+
+            <% elsif category == "Neutral"  %>
+              <% if (review.user.football_team.nil?) || (!home_and_away_ids.include? review.user.football_team.team_api_id ) %>
+                <%= render partial: "football_scores/partials/review_cards", locals: {review: review} %>
+              <% end %>
+
+            <% elsif (!review.user.football_team.nil?) && (category == @score.home_team_name) %>
+              <% if review.user.football_team.team_api_id == @score.home_team_id %>
+                <%= render partial: "football_scores/partials/review_cards", locals: {review: review} %>
+              <% end %>
+
+            <% elsif (!review.user.football_team.nil?) && (category == @score.away_team_name) %>
+              <% if review.user.football_team.team_api_id == @score.away_team_id %>
+                <%= render partial: "football_scores/partials/review_cards", locals: {review: review} %>
+              <% end %>
+
+            <% end %>
+
+          <% end %>
+        </div>
+      <% end %>
+
+    </div>
+
+  </div>
+</div>

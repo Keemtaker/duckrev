@@ -3,3 +3,9 @@ FirstReview:
   content: "nice game"
   user: FirstUser
   football_score: FirstScore
+
+SecondReview:
+  rating: 4
+  content: "not so interesting game"
+  user: FirstUser
+  football_score: SecondScore
