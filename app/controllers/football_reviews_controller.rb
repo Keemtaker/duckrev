@@ -12,7 +12,7 @@ class FootballReviewsController < ApplicationController
     @review.user_id = current_user.id
 
     if @review.save
-      flash[:notice] = "Thanks for your review"
+      flash[:notice] = "Thanks for your #{current_user.football_reviews.count.ordinalize} game review"
       redirect_to football_scores_path
     else
       render :new
