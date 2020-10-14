@@ -5,4 +5,12 @@ FirstUser:
   name: Keem
   encrypted_password: 123456
 
+SecondUser:
+  uid: 1235783
+  provider: twitter
+  username: keemo
+  name: Keemo
+  encrypted_password: 123873
+  email: nil
+
 
