@@ -8,9 +8,7 @@ task :tweet => :environment do
     config.access_token_secret = ENV['TWITTER_ACCESS_TOKEN_SECRET']
   end
 
-  score_tweet = client.update("testing 123")
-  if score_tweet.id?
-    client.update("testing api retweet option", attachment_url: "https://twitter.com/keemtaker/status/#{score_tweet.id}")
-  end
+  client.update("testing 123")
+
 end
 

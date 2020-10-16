@@ -1,6 +1,6 @@
 class FootballScore < ApplicationRecord
   after_validation :set_slug, only: [:create, :update]
-  after_create :football_score_tweet
+  after_create :football_score_tweet if Rails.env.development?
 
   has_many :football_reviews, dependent: :destroy
 
@@ -13,7 +13,6 @@ class FootballScore < ApplicationRecord
   validates :match_id, presence: true, uniqueness: true
   validates_inclusion_of :competition_id, :in => [2002, 2014, 2015, 2019, 2021], :message => "is not included in the list"
   validates :competition_name, presence: true
-
 
   def football_score_tweet
     if !self.tweet_score?
