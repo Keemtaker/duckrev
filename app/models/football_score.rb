@@ -14,6 +14,7 @@ class FootballScore < ApplicationRecord
   validates_inclusion_of :competition_id, :in => [2002, 2014, 2015, 2019, 2021], :message => "is not included in the list"
   validates :competition_name, presence: true
 
+
   def football_score_tweet
     if !self.tweet_score?
       review_url = Rails.application.routes.url_helpers.football_score_url(self, :host => "http://localhost:3000")
