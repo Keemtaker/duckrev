@@ -9,6 +9,9 @@
 
 vendor/
 
+# Ignore seeds.rb
+/db/seeds.rb
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
