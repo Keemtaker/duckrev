@@ -21,6 +21,7 @@ class FootballScore < ApplicationRecord
       tweet_response = $client.update("#{self.home_team_name}: #{self.home_team_fulltime_score}\n#{self.away_team_name}: #{self.away_team_fulltime_score}\n\nReview the game at #{review_url}")
       if tweet_response.id?
         self.update(tweet_score: true)
+        self.update(score_tweet_id: tweet_response.id)
       end
     end
   end
