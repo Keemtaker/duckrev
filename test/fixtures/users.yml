@@ -4,6 +4,8 @@ FirstUser:
   username: keem
   name: Keem
   encrypted_password: 123456
+  access_token: ghyts4567
+  access_secret: jhtgfckliop
 
 SecondUser:
   uid: 1235783
@@ -12,5 +14,6 @@ SecondUser:
   name: Keemo
   encrypted_password: 123873
   email: nil
-
+  access_token: ghlytwer67
+  access_secret: 4nmjklszxw9
 
