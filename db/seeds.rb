@@ -31,7 +31,7 @@
 # review_one = "VAR didn’t give the decision. VAR provides the referee with an opportunity to make a more informed decision. And it’s worked brilliantly so far this season. We should vent our frustration at the people who bring these ridiculous rules in. It’s the rule that’s the problem, not VAR"
 # review_two = "Barca paid Liverpool £150M for Coutinho that was used to assemble a team that knocked them out of the CL last season. Then sent Coutinho to Bayern to knock Barcelona out of the CL again this season and now they have to pay another £5M to Liverpool. Talk about poor life choices"
 # review_three = "Guardiola's career has had a strange second act. He's like a world-class novelist who emerges with a debut that changes the landscape; but who never quite writes a book of that brilliance again, despite several manifestations of genius in the years since."
-# review_four = "I did not think another footballer could hit 100 international goals in my lifetime. And I certainly didn’t think it would be Ronaldo to do it (if anyone did it) when he emerged, a flamboyant lad with earrings who just wanted to dribble. This sport."
+review_four = "I did not think another footballer could hit 100 international goals in my lifetime. And I certainly didn’t think it would be Ronaldo to do it (if anyone did it) when he emerged, a flamboyant lad with earrings who just wanted to dribble. This sport."
 # review_five = "4 champions league titles in 5 years. That is insane. No wonder Madrid fans were simply nonchalant during these champions league title anniversaries whiles other fans were all over the place with excitement"
 # review_six = "Luis Suarez is a volatile player in possession. Everything he does is instinctive. More often than not, it comes off because he’s faster in execution than you are at preparing for it. It almost never feels like he plans anything."
 
@@ -50,5 +50,8 @@
 # puts "Done"
 
 FootballScore.last.destroy
+
 FootballScore.create(home_team_name: "England", away_team_name: "Denmark", home_team_id: 899, away_team_id: 888, home_team_fulltime_score: 0, away_team_fulltime_score: 1, match_id: 20,
                       competition_id: 2002, competition_name: "Europe")
+
+FootballReview.create(rating: 7, content: review_four, user_id: User.find(57).id, football_score_id: FootballScore.last.id)

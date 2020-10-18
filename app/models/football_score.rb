@@ -1,6 +1,6 @@
 class FootballScore < ApplicationRecord
   after_validation :set_slug, only: [:create, :update]
-  after_create :football_score_tweet if Rails.env.development?
+  after_create :football_score_tweet
 
   has_many :football_reviews, dependent: :destroy
 
