@@ -10,7 +10,10 @@ class FootballReview < ApplicationRecord
 
   def football_review_tweet
     if !self.tweet_review?
-      tweet_response = $client.update("⭐️ #{self.rating}/10\n#{self.content}", attachment_url: "https://twitter.com/#{self.user.username}/status/#{self.football_score.score_tweet_id}")
+      $review_client.access_token.replace self.user.access_token
+      $review_client.access_token_secret.replace self.user.access_secret
+
+      tweet_response = $review_client.update("⭐️ #{self.rating}/10\n#{self.content}", attachment_url: "https://twitter.com/#{self.user.username}/status/#{self.football_score.score_tweet_id}")
       if tweet_response.id?
         self.update(tweet_review: true)
         self.update(review_tweet_id: tweet_response.id)
