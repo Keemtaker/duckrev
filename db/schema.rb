@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_17_200943) do
+ActiveRecord::Schema.define(version: 2020_10_18_093040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,8 @@ ActiveRecord::Schema.define(version: 2020_10_17_200943) do
     t.bigint "football_score_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "tweet_review", default: false
+    t.string "review_tweet_id"
     t.index ["football_score_id"], name: "index_football_reviews_on_football_score_id"
     t.index ["user_id"], name: "index_football_reviews_on_user_id"
   end
@@ -40,6 +42,7 @@ ActiveRecord::Schema.define(version: 2020_10_17_200943) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "slug"
     t.boolean "tweet_score", default: false
+    t.string "score_tweet_id"
     t.index ["match_id"], name: "index_football_scores_on_match_id", unique: true
   end
 
