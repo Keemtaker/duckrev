@@ -1,11 +1,11 @@
 FirstUser:
   uid: 123456
   provider: twitter
-  username: keem
+  username: api_playzone
   name: Keem
   encrypted_password: 123456
-  access_token: ghyts4567
-  access_secret: jhtgfckliop
+  access_token: <%= ENV['TWITTER_ACCESS_TOKEN'] %>
+  access_secret: <%= ENV['TWITTER_ACCESS_TOKEN_SECRET'] %>
 
 SecondUser:
   uid: 1235783
