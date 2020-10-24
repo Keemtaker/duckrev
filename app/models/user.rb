@@ -16,6 +16,10 @@ class User < ApplicationRecord
   validates :access_token, presence: true
   validates :access_secret, presence: true
 
+  def encrypt_field(value)
+    EncryptionService.encrypt(value)
+  end
+
   def self.from_omniauth(auth)
     user = find_or_initialize_by(provider: auth.provider, uid: auth.uid)
     user.email = auth.info.email
@@ -25,6 +29,8 @@ class User < ApplicationRecord
     user.location = auth.info.location
     user.access_token = auth.credentials.token
     user.access_secret = auth.credentials.secret
+    user.access_token = user.encrypt_field(user.access_token)
+    user.access_secret = user.encrypt_field(user.access_secret)
     user.save!
     return user
     #user.image = auth.info.image # assuming the user model has an image
