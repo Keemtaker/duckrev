@@ -20,4 +20,14 @@ class UserTest < ActiveSupport::TestCase
     assert_nil @first_user.football_team
   end
 
+  test "User access token can be encrypted and decrypted" do
+    raw_token = @first_user.access_token
+    @first_user.access_token = @first_user.encrypt_field(@first_user.access_token)
+    assert_not_equal raw_token, @first_user.access_token
+
+    @first_user.access_token = EncryptionService.decrypt(@first_user.access_token)
+    assert_equal raw_token, @first_user.access_token
+
+  end
+
 end
