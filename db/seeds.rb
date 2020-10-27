@@ -37,12 +37,12 @@ review_six = "Luis Suarez is a volatile player in possession. Everything he does
 
 
 review_list = [
-  {rating: 8, content: review_one, user_id: User.find_by(username: "Keem").id, football_score_id: 438},
-  {rating: 4, content: review_two, user_id: User.find_by(username: "Ronaldo").id, football_score_id: 438},
-  {rating: 7, content: review_three, user_id: User.find_by(username: "Ozil").id, football_score_id: 438},
-  {rating: 9, content: review_four, user_id: User.find_by(username: "Messi").id, football_score_id: 438},
-  {rating: 2, content: review_five, user_id: User.find_by(username: "Iniesta").id, football_score_id: 438},
-  {rating: 5, content: review_six, user_id: User.find_by(username: "Zidane").id, football_score_id: 438},
+  {rating: 8, content: review_one, user_id: User.find_by(username: "Keem").id, football_score_id: FootballScore.last.id},
+  {rating: 4, content: review_two, user_id: User.find_by(username: "Ronaldo").id, football_score_id: FootballScore.last.id},
+  {rating: 7, content: review_three, user_id: User.find_by(username: "Ozil").id, football_score_id: FootballScore.last.id},
+  {rating: 9, content: review_four, user_id: User.find_by(username: "Messi").id, football_score_id: FootballScore.last.id},
+  {rating: 2, content: review_five, user_id: User.find_by(username: "Iniesta").id, football_score_id: FootballScore.last.id},
+  {rating: 5, content: review_six, user_id: User.find_by(username: "Zidane").id, football_score_id: FootballScore.last.id},
 ]
 
 FootballReview.create!(review_list)

@@ -1,5 +1,4 @@
 class FootballReview < ApplicationRecord
-  after_create :football_review_tweet if !Rails.env.test?
 
   belongs_to :user
   belongs_to :football_score
@@ -8,23 +7,23 @@ class FootballReview < ApplicationRecord
   validates :content, presence: true, length: { maximum: 280, too_long: "%{count} characters is the maximum allowed" }
   validates :football_score_id, uniqueness: { scope: :user_id, message: "You've reviewed this score already!" }
 
-  def decrypt_field(value)
-    EncryptionService.decrypt(value)
-  end
+  # def decrypt_field(value)
+  #   EncryptionService.decrypt(value)
+  # end
 
-  def football_review_tweet
-    if !self.tweet_review?
-      $review_client.access_token.replace self.decrypt_field(self.user.access_token)
-      $review_client.access_token_secret.replace self.decrypt_field(self.user.access_secret)
+  # def football_review_tweet
+  #   if !self.tweet_review?
+  #     $review_client.access_token.replace self.decrypt_field(self.user.access_token)
+  #     $review_client.access_token_secret.replace self.decrypt_field(self.user.access_secret)
 
-      application_twitter_username = ENV['TWITTER_USERNAME']
-      tweet_url =  "https://twitter.com/#{application_twitter_username}/status/#{self.football_score.score_tweet_id}"
+  #     application_twitter_username = ENV['TWITTER_USERNAME']
+  #     tweet_url = "https://twitter.com/#{application_twitter_username}/status/#{self.football_score.score_tweet_id}"
 
-      tweet_response = $review_client.update("⭐️ #{self.rating}/10\n#{self.content}", attachment_url: "#{tweet_url}")
-      if tweet_response.id?
-        self.update(tweet_review: true)
-        self.update(review_tweet_id: tweet_response.id)
-      end
-    end
-  end
+  #     tweet_response = $review_client.update("⭐️ #{self.rating}/10\n#{self.content}", attachment_url: tweet_url)
+  #     if tweet_response.id?
+  #       self.update(tweet_review: true)
+  #       self.update(review_tweet_id: tweet_response.id)
+  #     end
+  #   end
+  # end
 end
