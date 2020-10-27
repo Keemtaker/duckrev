@@ -20,6 +20,8 @@ class User < ApplicationRecord
     EncryptionService.encrypt(value)
   end
 
+  private
+
   def self.from_omniauth(auth)
     user = find_or_initialize_by(provider: auth.provider, uid: auth.uid)
     user.email = auth.info.email
