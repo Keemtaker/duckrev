@@ -9,3 +9,27 @@ SecondReview:
   content: "not so interesting game"
   user: FirstUser
   football_score: SecondScore
+
+ThirdReview:
+  rating: 8
+  content: "nice one lads"
+  user: SecondUser
+  football_score: FirstScore
+
+FourthReview:
+  rating: 4
+  content: "avearge game ish"
+  user: ThirdUser
+  football_score: FirstScore
+
+FifthReview:
+  rating: 2
+  content: "not so interesting match"
+  user: FourthUser
+  football_score: FirstScore
+
+SixthReview:
+  rating: 4
+  content: "not so interesting"
+  user: FifthUser
+  football_score: FirstScore
