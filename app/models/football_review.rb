@@ -1,5 +1,4 @@
 class FootballReview < ApplicationRecord
-  after_create :football_review_tweet if !Rails.env.test?
 
   belongs_to :user
   belongs_to :football_score
@@ -17,7 +16,10 @@ class FootballReview < ApplicationRecord
       $review_client.access_token.replace self.decrypt_field(self.user.access_token)
       $review_client.access_token_secret.replace self.decrypt_field(self.user.access_secret)
 
-      tweet_response = $review_client.update("⭐️ #{self.rating}/10\n#{self.content}", attachment_url: "https://twitter.com/#{self.user.username}/status/#{self.football_score.score_tweet_id}")
+      application_twitter_username = ENV['TWITTER_USERNAME']
+      tweet_url = "https://twitter.com/#{application_twitter_username}/status/#{self.football_score.score_tweet_id}"
+
+      tweet_response = $review_client.update("⭐️ #{self.rating}/10\n#{self.content}", attachment_url: tweet_url)
       if tweet_response.id?
         self.update(tweet_review: true)
         self.update(review_tweet_id: tweet_response.id)

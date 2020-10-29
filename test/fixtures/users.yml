@@ -14,6 +14,33 @@ SecondUser:
   name: Keemo
   encrypted_password: 123873
   email: nil
-  access_token: ghlytwer67
-  access_secret: 4nmjklszxw9
+  access_token: ghlytwer67x
+  access_secret: 4nmjklszxw9s
+
+ThirdUser:
+  uid: 1235782
+  provider: twitter
+  username: third_user
+  email: third_user@yahoo.com
+  encrypted_password: 123873
+  access_token: ghlytwer67s
+  access_secret: 4nmjklszdw9
+
+FourthUser:
+  uid: 12455783
+  provider: twitter
+  username: fourth_user
+  email: fourth_user@yahoo.com
+  encrypted_password: 123873
+  access_token: ghlytweq67
+  access_secret: 4nmjkdszxw9
+
+FifthUser:
+  uid: 12390183
+  provider: twitter
+  username: fifth_user
+  email: fifth_user@yahoo.com
+  encrypted_password: 123873
+  access_token: ghlytwwr67
+  access_secret: 4nmjkwdszxw9
 
