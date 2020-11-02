@@ -51,6 +51,6 @@ puts "Done"
 
 
 # FootballScore.create(home_team_name: "England", away_team_name: "Denmark", home_team_id: 899, away_team_id: 888, home_team_fulltime_score: 0, away_team_fulltime_score: 1, match_id: 20,
-#                       competition_id: 2002, competition_name: "Europe")
+#                       competition_id: 2002, competition_name: "Premier League")
 
 # FootballReview.create(rating: 7, content: review_four, user_id: User.first.id, football_score_id: FootballScore.last.id)

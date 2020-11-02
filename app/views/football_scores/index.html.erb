@@ -6,19 +6,40 @@
         <%= f.search_field :home_team_name_or_away_team_name_or_competition_name_cont, placeholder: "search" %>
       <% end %>
       <br>
+      <% competitions = ["Premier League", "Serie A", "Ligue 1", "Primera Division"] %>
       <%= search_form_for @search, :class => 'filters_click' do |f| %>
         <h4>Competitions</h4>
-        <% @scores.each do |score| %>
+        <% competitions.each do |competition| %>
           <div class="styled-input-container">
             <a>
               <label>
-                <%= check_box_tag('q[competition_name_eq_any][]', score.competition_name) %>
-                <%= score.competition_name %>
+                <%= check_box_tag('q[competition_name_eq_any][]', competition) %>
+                <%= competition %>
               </label>
             </a>
           </div>
         <% end %>
       <% end %>
+      <br>
+      <% statuses = [false, true] %>
+        <%= search_form_for @search, :class => 'filters_click' do |f| %>
+          <h4>Score Status</h4>
+          <% statuses.each do |status| %>
+            <div class="styled-input-container">
+              <a>
+                <label>
+                  <%= check_box_tag('q[archived_state_eq_any][]', status) %>
+                  <% if status %>
+                    <%= "Archived Scores" %>
+                  <% else %>
+                    <%= "Recent Scores" %>
+                  <% end %>
+                </label>
+              </a>
+            </div>
+          <% end %>
+        <% end %>
+
     </div>
     <div class="col-sm-6">
       <%= render partial: "football_scores/partials/scores" %>
