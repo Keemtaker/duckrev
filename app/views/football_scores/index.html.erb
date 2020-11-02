@@ -5,6 +5,20 @@
       <%= search_form_for @search, :class => 'scores_search' do |f| %>
         <%= f.search_field :home_team_name_or_away_team_name_or_competition_name_cont, placeholder: "search" %>
       <% end %>
+      <br>
+      <%= search_form_for @search, :class => 'filters_click' do |f| %>
+        <h4>Competitions</h4>
+        <% @scores.each do |score| %>
+          <div class="styled-input-container">
+            <a>
+              <label>
+                <%= check_box_tag('q[competition_name_eq_any][]', score.competition_name) %>
+                <%= score.competition_name %>
+              </label>
+            </a>
+          </div>
+        <% end %>
+      <% end %>
     </div>
     <div class="col-sm-6">
       <%= render partial: "football_scores/partials/scores" %>

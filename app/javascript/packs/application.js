@@ -27,6 +27,8 @@ require("channels")
 // External imports
 import "bootstrap";
 require("../search")
+require("../score_filters")
+
 
 
 // Internal imports, e.g:
