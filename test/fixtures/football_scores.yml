@@ -3,20 +3,20 @@ FirstScore:
   away_team_name: West Ham United FC
   home_team_id: 1
   away_team_id:  563
-  home_team_fulltime_score: 3
-  away_team_fulltime_score: 2
+  home_team_fulltime_score: 2
+  away_team_fulltime_score: 3
   match_id: 1
   competition_id: 2021
   competition_name: Premier League
 
 SecondScore:
-  home_team_name: Chelsea
-  away_team_name: team two
+  home_team_name: Madrid
+  away_team_name: Barcelona
   home_team_id: 564
   away_team_id: 4
-  home_team_fulltime_score: 4
-  away_team_fulltime_score: 5
+  home_team_fulltime_score: 5
+  away_team_fulltime_score: 4
   match_id: 2
-  competition_id: 2021
-  competition_name: Premier League
+  competition_id: 2014
+  competition_name: Primera Division
 

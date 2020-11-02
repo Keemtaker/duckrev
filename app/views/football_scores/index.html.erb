@@ -1,30 +1,11 @@
-<br>
 <div class="container">
-  <div class="col-sm-12">
-    <h3>Fulltime Scores</h3>
-    <br>
-    <% @scores.each do | score | %>
-      <%= link_to football_score_path(score) do %>
-        <div class="card" style="width: 18rem;">
-          <div class="card-header">
-            <%= score.competition_name %>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item"><%= score.home_team_name %>
-              <span class="float-right">
-                <%= score.home_team_fulltime_score %>
-              </span>
-            </li>
-            <li class="list-group-item"><%= score.away_team_name %>
-              <span class="float-right">
-                <%= score.away_team_fulltime_score %>
-              </span>
-            </li>
-          </ul>
-        </div>
-      <% end %>
-      <br>
-    <% end %>
+  <br>
+  <h3>Fulltime Scores</h3>
+  <br>
+  <div class="row">
+    <%= render partial: "football_scores/partials/score_filters" %>
+    <div class="col-sm-6">
+      <%= render partial: "football_scores/partials/scores" %>
+    </div>
   </div>
 </div>
-
