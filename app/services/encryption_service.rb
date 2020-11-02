@@ -1,6 +1,6 @@
 class EncryptionService
   KEY = ActiveSupport::KeyGenerator.new(
-    ENV.fetch("SECRET_KEY_BASE")
+    ENV.fetch("ENCRYPTION_SERVICE_KEY")
   ).generate_key(
     ENV.fetch("ENCRYPTION_SERVICE_SALT"),
     ActiveSupport::MessageEncryptor.key_len
