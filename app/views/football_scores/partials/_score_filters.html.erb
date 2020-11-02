@@ -1,0 +1,97 @@
+<div class="col-sm-3 d-none d-sm-block">
+  <%= search_form_for @search, :class => 'scores_search' do |f| %>
+    <%= f.search_field :home_team_name_or_away_team_name_or_competition_name_cont, placeholder: "search" %>
+  <% end %>
+  <br>
+  <% competitions = ["Premier League", "Serie A", "Ligue 1", "Primera Division"] %>
+  <%= search_form_for @search, :class => 'filters_click' do |f| %>
+    <h4>Competitions</h4>
+    <% competitions.each do |competition| %>
+      <div class="styled-input-container">
+        <a>
+          <label>
+            <%= check_box_tag('q[competition_name_eq_any][]', competition) %>
+            <%= competition %>
+          </label>
+        </a>
+      </div>
+    <% end %>
+  <% end %>
+  <br>
+  <% statuses = [false, true] %>
+  <%= search_form_for @search, :class => 'filters_click' do |f| %>
+    <h4>Score Status</h4>
+    <% statuses.each do |status| %>
+      <div class="styled-input-container">
+        <a>
+          <label>
+            <%= check_box_tag('q[archived_state_eq_any][]', status) %>
+            <% if status %>
+              <%= "Archived Scores" %>
+            <% else %>
+              <%= "Recent Scores" %>
+            <% end %>
+          </label>
+        </a>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="col-sm-4 d-block d-sm-none">
+  <%= search_form_for @search, :class => 'scores_search' do |f| %>
+    <%= f.search_field :home_team_name_or_away_team_name_or_competition_name_cont, placeholder: "search" %>
+  <% end %>
+  <br>
+  <div class="dropdown">
+    <button class="btn btn-secondary btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Competitions
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <% competitions = ["Premier League", "Serie A", "Ligue 1", "Primera Division"] %>
+      <ul class="list-group">
+        <%= search_form_for @search, :class => 'filters_click' do |f| %>
+          <% competitions.each do |competition| %>
+            <li class="list-group-item">
+              <a class="dropdown-item">
+                <label>
+                  <%= check_box_tag('q[competition_name_eq_any][]', competition) %>
+                  <%= competition %>
+                </label>
+              </a>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <br>
+
+  <div class="dropdown">
+    <button class="btn btn-secondary btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Score Status
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <% statuses = [false, true] %>
+      <ul class="list-group">
+        <%= search_form_for @search, :class => 'filters_click' do |f| %>
+          <% statuses.each do |status| %>
+            <li class="list-group-item">
+              <a class="dropdown-item">
+                <label>
+                  <%= check_box_tag('q[archived_state_eq_any][]', status) %>
+                  <% if status %>
+                    <%= "Archived Scores" %>
+                  <% else %>
+                    <%= "Recent Scores" %>
+                  <% end %>
+                </label>
+              </a>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <br>
+</div>
