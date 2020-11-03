@@ -5,10 +5,8 @@ sports_token_key = ENV['SPORTS_TOKEN_KEY']
 sports_token_value = ENV['SPORTS_TOKEN_VALUE']
 
 desc "This task retrieves teams api data"
-task :footie_teams_data => :environment do
+task :football_teams_data => :environment do
   competition_ids = ["2002", "2014", "2015", "2019", "2021"]
-
-  FootballTeam.destroy_all
 
   competition_ids.each do | competition_id |
     response = HTTParty.get("#{base_uri}/competitions/#{competition_id}/teams", :headers => { "#{sports_token_key}" => "#{sports_token_value}"}).parsed_response
