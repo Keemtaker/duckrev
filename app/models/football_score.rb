@@ -13,7 +13,7 @@ class FootballScore < ApplicationRecord
   validates :home_team_fulltime_score, presence: true
   validates :away_team_fulltime_score, presence: true
   validates :match_id, presence: true, uniqueness: true
-  validates_inclusion_of :competition_id, :in => [2002, 2014, 2015, 2019, 2021], :message => "is not included in the list"
+  validates_inclusion_of :competition_id, :in => [2001, 2002, 2014, 2015, 2019, 2021], :message => "is not included in the list"
   validates :competition_name, presence: true
 
 
@@ -28,7 +28,7 @@ class FootballScore < ApplicationRecord
   def generate_average_reviews
     if (self.archived_state) && (!self.average_reviews)
       if self.football_reviews.size >= 2
-        review_url = Rails.application.routes.url_helpers.football_score_url(self, :host => "http://localhost:3000")
+        review_url = Rails.application.routes.url_helpers.football_score_url(self, :host => ENV['WEB_URL'])
         application_twitter_username = ENV['TWITTER_USERNAME']
         tweet_url =  "https://twitter.com/#{application_twitter_username}/status/#{self.score_tweet_id}"
         home_and_away_ids = [self.home_team_id, self.away_team_id]
@@ -80,7 +80,7 @@ class FootballScore < ApplicationRecord
 
   def football_score_tweet
     if !self.tweet_score?
-      review_url = Rails.application.routes.url_helpers.football_score_url(self, :host => "http://localhost:3000")
+      review_url = Rails.application.routes.url_helpers.football_score_url(self, :host => ENV['WEB_URL'])
       tweet_response = $client.update("#{self.home_team_name}: #{self.home_team_fulltime_score}\n#{self.away_team_name}: #{self.away_team_fulltime_score}\n\nReview the game at #{review_url}")
       if tweet_response.id?
         self.update(tweet_score: true)

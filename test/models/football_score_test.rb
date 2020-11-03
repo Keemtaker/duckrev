@@ -8,7 +8,7 @@ class FootballScoreTest < ActiveSupport::TestCase
   end
 
   test "football scores rake task" do
-    assert Rake::Task['footie_scores_data'].invoke
+    assert Rake::Task['football_scores_data'].invoke
   end
 
   test "football score is not valid with missing attributes" do
