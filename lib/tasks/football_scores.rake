@@ -7,7 +7,6 @@ scores_date = Time.now.strftime('%Y-%m-%d')
 
 desc "This task retrieves football scores api data"
 task :football_scores_data => :environment do
-  FootballScore.destroy_all
   competition_ids = ["2001", "2002", "2014", "2015", "2019", "2021"]
   competition_ids.each do | competition_id |
     response = HTTParty.get("#{base_uri}/competitions/#{competition_id}/matches?status=FINISHED&dateFrom=#{scores_date}&dateTo=#{scores_date}", :headers => { "#{sports_token_key}" => "#{sports_token_value}"}).parsed_response
