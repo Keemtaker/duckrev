@@ -1,4 +1,5 @@
 class FootballReview < ApplicationRecord
+  after_create :football_review_tweet if !Rails.env.test?
 
   belongs_to :user
   belongs_to :football_score
