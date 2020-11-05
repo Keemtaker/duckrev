@@ -1,7 +1,7 @@
 <br>
 <%= form_with url: '/football_teams', local: true do |form| %>
   <div class="container">
-    <div class="col-sm-12">
+    <div class="col-sm-6">
       <ul>
         <li>Please choose the club that you support from any of the countries below</li>
         <br>
@@ -38,11 +38,13 @@
       </div>
     </div>
     <br>
-    <%= form.submit 'Submit', class: "btn btn-md btn-primary btn-lg btn-block" %>
-    <br>
-    <br>
-      <%= link_to "Skip and choose team later", football_scores_path, class: "btn btn-md btn-danger btn-lg btn-block" %>
-    <br>
+    <div class="col-sm-6">
+      <%= form.submit 'Submit', class: "btn btn-md btn-primary btn-lg btn-block" %>
+      <br>
+      <br>
+        <%= link_to "Skip and choose team later", football_scores_path, class: "btn btn-md btn-danger btn-lg btn-block", style: "background-color: coral;" %>
+      <br>
+    </div>
   </div>
   <br>
 <% end %>

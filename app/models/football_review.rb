@@ -5,7 +5,7 @@ class FootballReview < ApplicationRecord
   belongs_to :football_score
 
   validates :rating, presence: true, inclusion: 1..10
-  validates :content, presence: true, length: { maximum: 280, too_long: "%{count} characters is the maximum allowed" }
+  validates :content, presence: true, length: { maximum: 270, too_long: "%{count} characters is the maximum allowed" }
   validates :football_score_id, uniqueness: { scope: :user_id, message: "You've reviewed this score already!" }
 
   def decrypt_field(value)

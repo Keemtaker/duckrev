@@ -1,6 +1,6 @@
 <div class="col-sm-3 d-none d-sm-block">
   <%= search_form_for @search, :class => 'scores_search' do |f| %>
-    <%= f.search_field :home_team_name_or_away_team_name_or_competition_name_cont, placeholder: "search" %>
+    <%= f.search_field :home_team_name_or_away_team_name_or_competition_name_cont, placeholder: " search" %>
   <% end %>
   <br>
   <% competitions = ["Premier League", "Primera Division", "UEFA Champions League", "Serie A", "Ligue 1"] %>
@@ -40,11 +40,11 @@
 
 <div class="col-sm-6 d-block d-sm-none">
   <%= search_form_for @search, :class => 'scores_search_mobile' do |f| %>
-    <%= f.search_field :home_team_name_or_away_team_name_or_competition_name_cont, placeholder: "search" %>
+    <%= f.search_field :home_team_name_or_away_team_name_or_competition_name_cont, placeholder: " search" %>
   <% end %>
   <br>
   <div class="dropdown">
-    <button class="btn btn-secondary btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button class="btn btn-secondary btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #167FFB">
       Competitions
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -68,7 +68,7 @@
   <br>
 
   <div class="dropdown">
-    <button class="btn btn-secondary btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button class="btn btn-secondary btn-block dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: #167FFB">
       Score Status
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
