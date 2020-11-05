@@ -28,7 +28,7 @@ require("channels")
 import "bootstrap";
 require("../search")
 require("../score_filters")
-
+require("../character_count")
 
 
 // Internal imports, e.g:

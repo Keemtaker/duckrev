@@ -42,7 +42,9 @@
     <div class="form-group">
       <label class="col-sm-1 control-label"></label>
       <div class="col-sm-6">
-        <%= f.input :content, as: :text,  :label => "Content" %>
+        <%= f.input :content, as: :text,  :label => "Content", input_html: { id: 'character-count' }, placeholder: "how did the lads perform today?" %>
+              <p>Charecter count: <em id="count"></em></p>
+
       </div>
     </div>
     <br>
