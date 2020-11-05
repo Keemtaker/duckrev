@@ -41,4 +41,13 @@ class FootballReviewsTest < ApplicationSystemTestCase
     end
   end
 
+  test "tweet character count" do
+    login_as @second_user
+    visit new_football_score_football_review_url(@second_score)
+
+    select '8', from: 'Rating'
+    fill_in "Content", with: "lads"
+    assert_text "Charecter count: 266"
+  end
+
 end
