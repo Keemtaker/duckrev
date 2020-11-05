@@ -1,18 +1,18 @@
 <br>
 <div class="container">
-  <div class="col-sm-10">
+  <div class="col-sm-6">
     <div class="card">
       <div class="card-header">
         <%= @score.competition_name %>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item"><%= @score.home_team_name %>
-          <span class="float-right">
+          <span class="float-right team-score">
             <%= @score.home_team_fulltime_score %>
           </span>
         </li>
         <li class="list-group-item"><%= @score.away_team_name %>
-          <span class="float-right">
+          <span class="float-right team-score">
             <%= @score.away_team_fulltime_score %>
           </span>
         </li>
@@ -34,21 +34,21 @@
 
     <div class="form-group">
       <label class="col-sm-1 control-label"></label>
-      <div class="col-sm-10">
+      <div class="col-sm-6">
         <%= f.input :rating, collection: 1..10, :label => "Your Rating" %>
       </div>
     </div>
 
     <div class="form-group">
       <label class="col-sm-1 control-label"></label>
-      <div class="col-sm-10">
+      <div class="col-sm-6">
         <%= f.input :content, as: :text,  :label => "Content" %>
       </div>
     </div>
     <br>
 
     <div class="col-sm-4">
-      <%= f.button :submit, "Tweet Review", class: "btn btn-md btn-block btn-success" %>
+      <%= f.button :submit, "Tweet Review", class: "btn btn-md btn-block btn-primary" %>
     </div>
     <br>
   <% end %>
