@@ -1,0 +1,27 @@
+<br>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= asset_path 'about.jpg' %>) ;">
+  <div class="container">
+    <h1>Be an online pundit</h1>
+    <br>
+    <br>
+    <% if !current_user %>
+      <%= link_to "Sign in with Twitter", user_twitter_omniauth_authorize_path, class: "btn btn-primary btn-lg" %>
+    <% end %>
+  </div>
+</div>
+<div class="container">
+  <div class="col-md-8 col-md-offset-2 lead" style="margin-top: 50px; margin-bottom: 200px;">
+    Duckrev is a football rate and review site for football fans. Football is played on the pitch but also predominatly discussed online,
+    especially on twitter. This site integrates with twitter and users are required to sign in with twitter.
+    Users can rate and review football games and subsequently tweet it to their timelines.
+    <br>
+    <br>
+    The concept is pretty simple. Duckrev has a twitter account, <%= link_to "@DuckrevFootball", "https://twitter.com/DuckrevFootball", target: :_blank %> (please follow on twitter) that
+    tweets out full time football scores, with a link to review the game.
+    <br>
+    <br>
+    This web project is built and maintained by Hakeem Baba. You can reach out on twitter <%= link_to "@Keemtaker", "https://twitter.com/Keemtaker", target: :_blank %>
+    <br>
+    You can also reach out at duckrevfootball@gmail.com. I am open to feedback, suggestions or even football banter.
+  </div>
+</div>
