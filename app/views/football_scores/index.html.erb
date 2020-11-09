@@ -1,6 +1,19 @@
 <div class="container">
   <br>
-  <h3>Fulltime Scores</h3>
+  <div class="col-sm-9">
+    <h3 class="text-center">Fulltime Scores</h3>
+    <% if user_signed_in? %>
+      <% if current_user.football_team.nil? %>
+        <h5 class="text-center"><%= link_to "Choose Football Club", football_teams_path, class: "btn btn-primary" %></h5>
+      <% end %>
+      <br>
+      <ul>
+        <li>Select a  <strong class="strong-style">recent</strong> score to review it. You can only review a <strong class="strong-style">recent</strong> score. <strong class="strong-style">Recent</strong> scores are identified by a blinking green dot</li>
+        <br>
+        <li>Scores without a blinking dot are <strong class="strong-style">archived</strong> scores and have been closed for reviews. You can select and read reviews of <strong class="strong-style">archived</strong> scores</li>
+      </ul>
+    <% end %>
+  </div>
   <br>
   <div class="row">
     <%= render partial: "football_scores/partials/score_filters" %>

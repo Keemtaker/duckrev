@@ -26,6 +26,7 @@ class FootballTeamsTest < ApplicationSystemTestCase
 
     assert_equal "/football_scores", page.current_path
     assert_text "Fulltime Scores"
+    assert_no_text "Choose Football Club"
     assert_equal @first_user.football_team.name, @first_team.name
   end
 
@@ -37,6 +38,7 @@ class FootballTeamsTest < ApplicationSystemTestCase
 
     assert_equal "/football_scores", page.current_path
     assert_text "Fulltime Scores"
+    assert_text "Choose Football Club"
     assert_nil @first_user.football_team
   end
 
