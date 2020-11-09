@@ -35,4 +35,31 @@ class MobileViewsTest < MobileSystemTestCase
     uncheck @first_score.competition_name
     assert_text @second_score.home_team_name
   end
+
+  test "Check about page, navbar and footer for mobile" do
+    visit root_url
+    click_on(class: 'navbar-toggler')
+    click_on "About"
+    assert_text "Sign in with Twitter"
+
+    login_as @first_user
+    click_on(class: 'navbar-toggler')
+    click_on "About"
+    assert_no_text "Sign in with Twitter"
+    click_on(class: 'navbar-toggler')
+    assert_text "Log Out"
+
+    click_on(class: 'navbar-toggler')
+    click_on "Football Scores", match: :first
+    assert_equal "/football_scores", page.current_path
+
+    click_on(id: 'footer-scores')
+    assert_equal "/football_scores", page.current_path
+
+    click_on(class: 'navbar-toggler')
+    click_on(class: 'navbar-toggler')
+
+    click_on "@DuckrevFootball", match: :first
+  end
+
 end

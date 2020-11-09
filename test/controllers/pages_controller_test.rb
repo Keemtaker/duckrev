@@ -10,4 +10,9 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  test "should get users sign in" do
+    get new_user_session_url
+    assert_response :success
+  end
+
 end
