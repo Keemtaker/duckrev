@@ -1,8 +1,9 @@
 <br>
-<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= asset_path 'about.jpg' %>) ;">
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= asset_path 'login.jpg' %>) ;">
   <div class="container">
     <h1>Be an online pundit</h1>
     <br>
+    <p>Let the lads know how they performed</p>
     <br>
     <% if !current_user %>
       <%= link_to "Sign in with Twitter", user_twitter_omniauth_authorize_path, class: "btn btn-primary btn-lg" %>
