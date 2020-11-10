@@ -4,6 +4,10 @@
     <div class="card">
       <div class="card-header">
         <%= @score.competition_name %>
+        <span style="float: right;">
+          <span class="dot"></span>
+          <%= @score.created_at.strftime("%d-%b-%y") %>
+        </span>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item"><%= @score.home_team_name %>

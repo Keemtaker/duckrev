@@ -27,7 +27,7 @@
     <br>
 
     <% if @score.archived_state %>
-      <div style="color: gray; padding: 10px; background-color: white;">This score is archived and can no longer be reviewed</div>
+      <span style="color: gray; padding: 10px; background-color: white;">This score is archived and can no longer be reviewed</span>
     <% else %>
       <% if user_signed_in? %>
         <%= link_to "Review this game", new_football_score_football_review_path(@score), class: "btn btn-md btn-primary" %>
