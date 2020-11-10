@@ -31,6 +31,18 @@
       <li>Having said that, please only review the game if you actually watched it</li>
       <br>
       <li>Your review will be sent out as a tweet</li>
+      <br>
+      <% home_and_away_ids = [@score.home_team_id, @score.away_team_id] %>
+      <% if current_user.football_team.present? %>
+        <% if home_and_away_ids.include? current_user.football_team.team_api_id %>
+          <li class="team-score"><%= "You chose #{current_user.football_team.short_name} as your club, so you will review this game as a #{current_user.football_team.short_name} fan" %></li>
+        <% else %>
+          <li class="team-score"><%= "You chose #{current_user.football_team.short_name} as your club, so you will review this game as a Neutral fan" %></li>
+        <% end %>
+      <% else %>
+        <li class="team-score"><%= "You have not chosen any club yet, so you will review this game as a Neutral fan" %></li>
+      <% end %>
+
     </ul>
   <div>
 
