@@ -7,6 +7,11 @@ class FootballReview < ApplicationRecord
   validates :rating, presence: true, inclusion: 1..10
   validates :content, presence: true, length: { maximum: 270, too_long: "%{count} characters is the maximum allowed" }
   validates :football_score_id, uniqueness: { scope: :user_id, message: "You've reviewed this score already!" }
+  validates :recent_score, presence: { message: "This score is archived and can no longer be reviewed" }
+
+  def recent_score
+   return true if !self.football_score.archived_state
+  end
 
   def decrypt_field(value)
     EncryptionService.decrypt(value)
