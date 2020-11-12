@@ -1,9 +1,15 @@
 <br>
 <div class="container">
-  <div class="col-sm-8">
+  <div class="col-sm-7">
     <div class="card">
       <div class="card-header">
         <%= @score.competition_name %>
+          <span style="float: right;">
+            <% if !@score.archived_state %>
+              <span class="dot"></span>
+            <% end %>
+            <%= @score.created_at.strftime("%d-%b-%y") %>
+          </span>
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item"><%= @score.home_team_name %>
@@ -19,10 +25,19 @@
       </ul>
     </div>
     <br>
-    <% if user_signed_in? %>
-      <%= link_to "Review this game", new_football_score_football_review_path(@score), class: "btn btn-md btn-primary" %>
+
+    <% if @score.archived_state %>
+      <span style="color: gray; padding: 10px; background-color: white;">This score is archived and can no longer be reviewed</span>
     <% else %>
-      <%= link_to "Sign in with twitter to review a game", user_twitter_omniauth_authorize_path, class: "btn btn-md btn-primary" %>
+      <% if user_signed_in? %>
+        <% if @score.football_reviews.where(user_id: current_user.id).present? %>
+          <span style="font-style: italic; color: coral;">You have already reviewed this game</span>
+        <% else %>
+          <%= link_to "Review this game", new_football_score_football_review_path(@score), class: "btn btn-md btn-primary" %>
+        <% end %>
+      <% else %>
+        <%= link_to "Sign in with twitter to review a game", user_twitter_omniauth_authorize_path, class: "btn btn-md btn-primary" %>
+      <% end %>
     <% end %>
     <br>
     <br>

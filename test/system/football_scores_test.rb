@@ -3,10 +3,12 @@ require "application_system_test_case"
 class FootballScoresTest < ApplicationSystemTestCase
   def setup
     @first_user = users(:FirstUser)
+    @second_user = users(:SecondUser)
     @first_team = football_teams(:WestHam)
     @second_team = football_teams(:Chelsea)
     @first_score = football_scores(:FirstScore)
     @second_score = football_scores(:SecondScore)
+    @third_score = football_scores(:ThirdScore)
     @first_review = football_reviews(:FirstReview)
     @second_review = football_reviews(:SecondReview)
   end
@@ -31,7 +33,20 @@ class FootballScoresTest < ApplicationSystemTestCase
     assert_text "#{review_categories.sample} Fan Reviews"
     click_on "#{review_categories.sample} Fan Reviews"
     click_on "Sign in with twitter to review a game"
+  end
 
+  test "click on review game" do
+    login_as @second_user
+    visit football_score_url(@second_score)
+    assert_equal football_score_path(@second_score), page.current_path
+    assert_text "Review this game"
+  end
+
+  test "football score is archived and closed for reviews" do
+    login_as @first_user
+    visit football_score_url(@third_score)
+    assert_equal football_score_path(@third_score), page.current_path
+    assert_text "This score is archived and can no longer be reviewed"
   end
 
   test "test search function" do
@@ -63,8 +78,8 @@ class FootballScoresTest < ApplicationSystemTestCase
     visit football_score_url(@first_score)
 
     assert_equal football_score_path(@first_score), page.current_path
-    assert_text "Review this game"
     assert_text @first_review.content
+    assert_text "You have already reviewed this game"
 
     click_on "#{@first_score.away_team_name} Fan Reviews"
     sleep 2
@@ -74,9 +89,6 @@ class FootballScoresTest < ApplicationSystemTestCase
     sleep 2
     assert_text @first_review.rating
     assert_text "/10"
-
-    click_on "Review this game"
-    assert_equal new_football_score_football_review_path(@first_score), page.current_path
   end
 
   test "user should continue to see reviews in right categories " do
@@ -118,5 +130,4 @@ class FootballScoresTest < ApplicationSystemTestCase
     sleep 2
     assert_text @second_review.content
   end
-
 end
