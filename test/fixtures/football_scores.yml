@@ -10,13 +10,25 @@ FirstScore:
   competition_name: Premier League
 
 SecondScore:
-  home_team_name: Madrid
+  home_team_name: Chelsea
   away_team_name: Barcelona
   home_team_id: 564
   away_team_id: 4
   home_team_fulltime_score: 5
   away_team_fulltime_score: 4
   match_id: 2
-  competition_id: 2014
-  competition_name: Primera Division
+  competition_id: 2001
+  competition_name: UEFA Champions League
+
+ThirdScore:
+  home_team_name: City
+  away_team_name: Everton
+  home_team_id: 202
+  away_team_id: 145
+  home_team_fulltime_score: 4
+  away_team_fulltime_score: 1
+  match_id: 2021
+  competition_id: 2021
+  competition_name: Premier League
+  archived_state: true
 

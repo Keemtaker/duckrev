@@ -3,7 +3,12 @@ require "application_system_test_case"
 class FootballReviewsTest < ApplicationSystemTestCase
   def setup
     @second_user = users(:SecondUser)
+    @first_score = football_scores(:FirstScore)
     @second_score = football_scores(:SecondScore)
+    @third_score = football_scores(:ThirdScore)
+    @first_team = football_teams(:WestHam)
+    @second_team = football_teams(:Chelsea)
+    # @third_team = football_teams(:Madrid)
   end
 
   test "check for key texts in football review new page" do
@@ -15,9 +20,27 @@ class FootballReviewsTest < ApplicationSystemTestCase
     assert_selector "input[type=submit]"
   end
 
+  test "review the game as a team fans" do
+    login_as @second_user
+    @second_user.football_team = @second_team
+    visit new_football_score_football_review_url(@second_score)
+
+    assert_text "You chose #{@second_user.football_team.short_name} as your club, so you will review this game as a #{@second_user.football_team.short_name} fan"
+  end
+
+  test "review the game as a neutral fan but still attached to a club " do
+    login_as @second_user
+    @second_user.football_team = @first_team
+    visit new_football_score_football_review_url(@second_score)
+    page.save_and_open_screenshot(full: true)
+
+    assert_text "You chose #{@second_user.football_team.short_name} as your club, so you will review this game as a Neutral fan"
+  end
+
   test "lets make a review" do
     login_as @second_user
     visit new_football_score_football_review_url(@second_score)
+    assert_text "You have not chosen any club yet, so you will review this game as a Neutral fan"
 
     assert_difference 'FootballReview.count' do
       select '9', from: 'Rating'
