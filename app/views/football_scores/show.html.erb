@@ -27,7 +27,7 @@
     <br>
 
     <% if @score.archived_state %>
-      <span style="color: gray; padding: 10px; background-color: white;">This score is archived and can no longer be reviewed</span>
+      <div style="color: gray; background-color: white;">This score is archived and can no longer be reviewed</div>
     <% else %>
       <% if user_signed_in? %>
         <% if @score.football_reviews.where(user_id: current_user.id).present? %>
