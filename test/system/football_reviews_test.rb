@@ -32,7 +32,6 @@ class FootballReviewsTest < ApplicationSystemTestCase
     login_as @second_user
     @second_user.football_team = @first_team
     visit new_football_score_football_review_url(@second_score)
-    page.save_and_open_screenshot(full: true)
 
     assert_text "You chose #{@second_user.football_team.short_name} as your club, so you will review this game as a Neutral fan"
   end

@@ -14,6 +14,8 @@ class SharedPagesTest < ApplicationSystemTestCase
     visit root_url
     click_on "About"
     assert_text "Sign in with Twitter"
+    click_on(class: 'navbar-brand')
+    assert_equal root_path, page.current_path
 
     login_as @first_user
     click_on "About"
