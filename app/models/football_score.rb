@@ -27,7 +27,7 @@ class FootballScore < ApplicationRecord
 
   def generate_average_reviews
     if (self.archived_state) && (!self.average_reviews)
-      if self.football_reviews.size >= 2
+      if self.football_reviews.size >= 3
         review_url = Rails.application.routes.url_helpers.football_score_url(self, :host => ENV['WEB_URL'])
         application_twitter_username = ENV['TWITTER_USERNAME']
         tweet_url =  "https://twitter.com/#{application_twitter_username}/status/#{self.score_tweet_id}"
