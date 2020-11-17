@@ -108,7 +108,7 @@ class FootballScoresTest < ApplicationSystemTestCase
 
     click_on "Neutral Fan Reviews"
     sleep 2
-    assert_no_text @first_review.rating
+    assert_no_text @first_review.content
   end
 
   test "still testing reviews in right categories" do
