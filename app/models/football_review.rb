@@ -1,5 +1,6 @@
 class FootballReview < ApplicationRecord
   after_create :football_review_tweet if !Rails.env.test?
+  after_create_commit :football_review_slack_notification
 
   belongs_to :user
   belongs_to :football_score
@@ -11,6 +12,12 @@ class FootballReview < ApplicationRecord
 
   def recent_score
    return true if !self.football_score.archived_state
+  end
+
+  def football_review_slack_notification
+    SlackNotifier::REVIEW_SLACK.ping("🎉 New review\nId: #{self.id}\nUsername: @#{self.user.username} See at https://twitter.com/#{self.user.username}\
+    \n⚽️ #{self.football_score.home_team_name}: #{self.football_score.home_team_fulltime_score} vs #{self.football_score.away_team_name}: #{self.football_score.away_team_fulltime_score}\
+    \nRating: #{self.rating}⭐️\nReview: #{self.content}")
   end
 
   def decrypt_field(value)
