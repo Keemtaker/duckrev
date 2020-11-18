@@ -65,6 +65,8 @@ GEM
     bootsnap (1.4.8)
       msgpack (~> 1.0)
     buftok (0.2.0)
+    bugsnag (6.18.0)
+      concurrent-ruby (~> 1.0)
     builder (3.2.4)
     byebug (11.1.3)
     capybara (3.33.0)
@@ -300,6 +302,7 @@ PLATFORMS
 DEPENDENCIES
   autoprefixer-rails
   bootsnap (>= 1.4.2)
+  bugsnag
   byebug
   capybara (>= 2.15)
   devise
