@@ -30,4 +30,8 @@ class UserTest < ActiveSupport::TestCase
 
   end
 
+  test "test slack webhook by creating a new user" do
+    User.create(username: "duckrev_slack", uid: "123", provider: "twitter", password: "123456", email: nil, access_token: "1289ih", access_secret: "fghkldkns")
+  end
+
 end

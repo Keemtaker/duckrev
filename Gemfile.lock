@@ -238,6 +238,7 @@ GEM
       actionpack (>= 5.0)
       activemodel (>= 5.0)
     simple_oauth (0.3.1)
+    slack-notifier (2.3.2)
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -320,6 +321,7 @@ DEPENDENCIES
   sass-rails (>= 6)
   selenium-webdriver
   simple_form
+  slack-notifier
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)

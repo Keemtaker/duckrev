@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  after_create_commit :user_slack_notification
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -18,6 +20,10 @@ class User < ApplicationRecord
 
   def encrypt_field(value)
     EncryptionService.encrypt(value)
+  end
+
+  def user_slack_notification
+    SlackNotifier::USER_SLACK.ping("🎉 New user\nId: #{self.id}\nUsername: @#{self.username}. See at https://twitter.com/#{self.username}")
   end
 
   private
