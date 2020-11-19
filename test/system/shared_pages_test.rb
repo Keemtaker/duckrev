@@ -5,6 +5,8 @@ class SharedPagesTest < ApplicationSystemTestCase
     @first_user = users(:FirstUser)
   end
 
+
+
   test "Check that sign in page works okay" do
     visit new_user_session_url
     click_on(class: 'btn btn-primary btn-lg')
@@ -35,4 +37,20 @@ class SharedPagesTest < ApplicationSystemTestCase
     assert_text "Sign in with Twitter"
   end
 
+  test "Non-admins cant access admin page" do
+    visit rails_admin_url
+    assert_equal root_path, page.current_path
+
+    login_as @first_user
+    visit rails_admin_url
+    assert_equal root_path, page.current_path
+    page.save_and_open_screenshot(full: true)
+  end
+
+  test "an authenticated admin can access the admin page" do
+    @first_user.update(admin: true)
+    login_as @first_user
+    visit rails_admin_url
+    assert_equal rails_admin_path, page.current_path
+  end
 end
