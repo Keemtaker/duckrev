@@ -44,7 +44,6 @@ class SharedPagesTest < ApplicationSystemTestCase
     login_as @first_user
     visit rails_admin_url
     assert_equal root_path, page.current_path
-    page.save_and_open_screenshot(full: true)
   end
 
   test "an authenticated admin can access the admin page" do
