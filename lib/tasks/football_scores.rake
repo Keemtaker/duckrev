@@ -20,6 +20,3 @@ task :football_scores_data => :environment do
     end
   end
 end
-
-
-
