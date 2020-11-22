@@ -57,14 +57,14 @@ class FootballScore < ApplicationRecord
 
         if home_reviews.size >=  1
           home_reviews_average = home_reviews.inject{ |sum, el| sum + el }.to_f / home_reviews.size
-          home_reviews_stats_tweet = "#{home_reviews_average.round(1)}⭐️ average for #{self.home_team_name}"
+          home_reviews_stats_tweet = "#{home_reviews_average.round(1)}⭐️ average for #{self.home_team_name} fans"
         else
           home_reviews_stats_tweet = ""
         end
 
         if away_reviews.size >=  1
           away_reviews_average = away_reviews.inject{ |sum, el| sum + el }.to_f / away_reviews.size
-          away_reviews_stats_tweet = "#{away_reviews_average.round(1)}⭐️ average for #{self.away_team_name}"
+          away_reviews_stats_tweet = "#{away_reviews_average.round(1)}⭐️ average for #{self.away_team_name} fans"
         else
           away_reviews_stats_tweet = ""
         end
@@ -81,10 +81,29 @@ class FootballScore < ApplicationRecord
   def football_score_tweet
     if !self.tweet_score?
       review_url = Rails.application.routes.url_helpers.football_score_url(self, :host => ENV['WEB_URL'])
-      tweet_response = $client.update("#{self.home_team_name}: #{self.home_team_fulltime_score}\n#{self.away_team_name}: #{self.away_team_fulltime_score}\n\nReview the game at #{review_url}")
+      tweet_response = $client.update("#{self.home_team_name}: #{self.home_team_fulltime_score}\n#{self.away_team_name}: #{self.away_team_fulltime_score}\n\nReview the game at #{review_url}\n#{twitter_hashtag}")
       if tweet_response.id?
         self.update(tweet_score: true)
         self.update(score_tweet_id: tweet_response.id)
+      end
+    end
+  end
+
+  def twitter_hashtag
+    if ENV['WEB_URL'] == "https://duckrev.com"
+      case self.competition_name
+      when "Premier League"
+        '#PremierLeague #EPL #PL'
+      when "Primera Division"
+        '#LaLiga #Football'
+      when "UEFA Champions League"
+        '#ChampionsLeague #UEFA'
+      when "Bundesliga"
+        '#Bundesliga #Football'
+      when "Serie A"
+        '#SerieA #Football'
+      when "Ligue 1"
+        '#Ligue1 #Football'
       end
     end
   end
