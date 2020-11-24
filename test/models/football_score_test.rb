@@ -28,7 +28,7 @@ class FootballScoreTest < ActiveSupport::TestCase
   end
 
   test "rake task can archive football scores older than specified time" do
-    FootballScore.second.update(created_at: 13.hours.ago)
+    FootballScore.second.update(created_at: 25.hours.ago)
     assert Rake::Task['archive_football_scores'].invoke
     assert FootballScore.second.archived_state?
     assert_not FootballScore.second.average_reviews?
@@ -36,7 +36,7 @@ class FootballScoreTest < ActiveSupport::TestCase
   end
 
   test "rake task can archive football scores and generate average reviews" do
-    FootballScore.first.update(created_at: 13.hours.ago)
+    FootballScore.first.update(created_at: 25.hours.ago)
     FootballScore.first.update(score_tweet_id: "1321161644010033154")
     assert Rake::Task['archive_football_scores'].invoke
     assert FootballScore.first.archived_state?

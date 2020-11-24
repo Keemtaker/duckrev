@@ -6,7 +6,7 @@ task :archive_football_scores => :environment do
   current_time = Time.now
 
   active_scores.each do | score |
-    if current_time > score.created_at + 12.hours
+    if current_time > score.created_at + 24.hours
       score.update(archived_state: true)
     end
   end

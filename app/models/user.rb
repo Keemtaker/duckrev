@@ -2,7 +2,7 @@ class User < ApplicationRecord
   after_create_commit :user_slack_notification
 
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  # :confirmable, :lockable,
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :trackable, :timeoutable, :omniauthable, omniauth_providers: %i[twitter]
