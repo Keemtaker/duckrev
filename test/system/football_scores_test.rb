@@ -46,7 +46,7 @@ class FootballScoresTest < ApplicationSystemTestCase
     login_as @first_user
     visit football_score_url(@third_score)
     assert_equal football_score_path(@third_score), page.current_path
-    assert_text "This score is archived and can no longer be reviewed"
+    assert_text "This score is archived and can no longer be reviewed. Scores are archived after 24 hours"
   end
 
   test "test search function" do
