@@ -90,7 +90,7 @@ class FootballScore < ApplicationRecord
   end
 
   def twitter_hashtag
-    if ENV['WEB_URL'] == "https://duckrev.com"
+    if ENV['WEB_URL'] == "https://duckrev.herokuapp.com"
       case self.competition_name
       when "Premier League"
         '#PremierLeague #EPL #PL'
